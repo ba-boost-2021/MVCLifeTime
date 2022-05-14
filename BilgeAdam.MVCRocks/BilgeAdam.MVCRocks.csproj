@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BilgeAdam.Common\BilgeAdam.Common.csproj" />
+    <ProjectReference Include="..\BilgeAdam.Data\BilgeAdam.Data.csproj" />
+    <ProjectReference Include="..\BilgeAdam.Services\BilgeAdam.Services.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+﻿@model List<CustomService>
+
+<h1>Servis Değerleri</h1>
+
+@foreach (var service in Model)
+{
+    @service.Name
+    <h6>Değer</h6>
+    @service.Count <span>-</span>  @service.Created <em>@service.Code</em>
+    <hr />
+}
