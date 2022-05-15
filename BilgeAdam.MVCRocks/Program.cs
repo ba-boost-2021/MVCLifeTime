@@ -22,7 +22,7 @@ builder.Services.AddDbContext<NorthwindContext>(builder =>
 {
     builder.UseSqlServer(settings.Database.ConnectionString);
 });
-builder.Services.AddCustomServices();
+builder.Services.AddCustomServices().AddDataServices();
 
 var app = builder.Build();
 //-----------------------------------------------------------------------------------

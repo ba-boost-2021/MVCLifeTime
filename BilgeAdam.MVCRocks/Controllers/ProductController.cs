@@ -1,20 +1,22 @@
 ﻿using BilgeAdam.Data.Context;
+using BilgeAdam.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BilgeAdam.MVCRocks.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly NorthwindContext context;
-
-        public ProductController(NorthwindContext context)
+        public IActionResult Products([FromServices] IProductService productService)
         {
-            this.context = context;
+            var products = productService.GetProducts();
+            return View(products);
         }
 
-        public IActionResult Products()
+        public IActionResult Categories([FromServices] ICategoryService categoryService)
         {
-            return View(); 
+            var categories = categoryService.GetCategories();
+            return View(categories);
         }
     }
 }
+//FAT CONTROLLER

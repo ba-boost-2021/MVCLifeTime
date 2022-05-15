@@ -1,14 +1,24 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BilgeAdam.Services.Abstractions;
+using BilgeAdam.Services.Concretes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BilgeAdam.Services
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCustomServices(this IServiceCollection services)
+        public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddSingleton<SingletonService>();
             services.AddScoped<ScopedService>();
             services.AddTransient<TransientService>();
+            return services;
+        }
+
+        public static IServiceCollection AddDataServices(this IServiceCollection services)
+        {
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            return services;
         }
     }
 }
