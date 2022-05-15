@@ -12,18 +12,22 @@ namespace BilgeAdam.Services.Concretes
         {
             this.context = context;
         }
-        public List<ProductListDTO> GetProducts()
+        public List<ProductListDTO> GetProducts(int? categoryId)
         {
-            return context.Products
-                          .Select(s => new ProductListDTO
-                          {
-                              Id = s.ProductID,
-                              Name = s.ProductName,
-                              Category = s.Category != null ? s.Category.CategoryName : null,
-                              Price = s.UnitPrice,
-                              Stock = s.UnitsInStock
-                          })
-                          .ToList();
+            var query = context.Products.AsQueryable();
+            if (categoryId.HasValue)
+            {
+                query = query.Where(f => f.CategoryID == categoryId.Value);
+            }
+            return query.Select(s => new ProductListDTO
+                        {
+                            Id = s.ProductID,
+                            Name = s.ProductName,
+                            Category = s.Category != null ? s.Category.CategoryName : null,
+                            Price = s.UnitPrice,
+                            Stock = s.UnitsInStock
+                        })
+                        .ToList();
         }
     }
 }

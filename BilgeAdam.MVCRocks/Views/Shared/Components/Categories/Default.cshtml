@@ -1,0 +1,8 @@
+﻿@model List<CategoryListDTO>
+<h5>Kategoriler</h5>
+<ul class="list-unstyled">
+    @foreach(var c in Model)
+    {
+        <li>@Html.ActionLink(c.Name, "Products", "Product", new { categoryId = c.Id})</li>
+    }
+</ul>

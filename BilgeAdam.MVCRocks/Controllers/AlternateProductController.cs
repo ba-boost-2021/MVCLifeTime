@@ -16,7 +16,7 @@ namespace BilgeAdam.MVCRocks.Controllers
 
         public IActionResult Products()
         {
-            var products = productService.GetProducts();
+            var products = productService.GetProducts(0);
             return View(products);
         }
 
