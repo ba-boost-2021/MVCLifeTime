@@ -18,6 +18,7 @@ namespace BilgeAdam.Services
         {
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ISupplierService, SupplierService>();
             return services;
         }
     }

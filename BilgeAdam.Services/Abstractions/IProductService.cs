@@ -4,6 +4,7 @@ namespace BilgeAdam.Services.Abstractions
 {
     public interface IProductService
     {
-        public List<ProductListDTO> GetProducts(int? categoryId);
+        List<ProductListDTO> GetProducts(int? categoryId);
+        void Save(NewProductDTO data);
     }
 }

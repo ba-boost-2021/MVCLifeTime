@@ -22,5 +22,15 @@ namespace BilgeAdam.Services.Concretes
                               Name = s.CategoryName
                           }).ToList();
         }
+
+        public List<OptionDTO> Options()
+        {
+            return context.Categories
+                          .Select(s => new OptionDTO
+                          {
+                              Value = s.CategoryID.ToString(),
+                              Text = s.CategoryName
+                          }).ToList();
+        }
     }
 }

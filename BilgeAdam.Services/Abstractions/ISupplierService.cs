@@ -2,9 +2,8 @@
 
 namespace BilgeAdam.Services.Abstractions
 {
-    public interface ICategoryService
+    public interface ISupplierService
     {
-        List<CategoryListDTO> GetCategories();
         List<OptionDTO> Options();
     }
 }

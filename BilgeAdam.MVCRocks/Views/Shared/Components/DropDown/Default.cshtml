@@ -1,0 +1,11 @@
+﻿@model DropDownOptionViewModel
+<select class="form-control" name="@Model.Property" asp-items="@(new SelectList(Model.Options, "Value", "Text"))"></select>
+
+@*
+Yöntem 2    
+<select class="form-control" name="@Model.Property">
+    @foreach (var item in Model.Options)
+    {
+        <option value=@item.Value>@item.Text</option>
+    }
+</select>*@

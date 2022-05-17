@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BilgeAdam.Data.Entities
 {
@@ -15,8 +10,12 @@ namespace BilgeAdam.Data.Entities
         public short? UnitsInStock { get; set; }
         public decimal? UnitPrice { get; set; }
         public int? CategoryID { get; set; }
+        public int? SupplierID { get; set; }
 
         [ForeignKey(nameof(CategoryID))]
         public Category Category { get; set; }
+
+        [ForeignKey(nameof(SupplierID))]
+        public Supplier Supplier { get; set; }
     }
 }

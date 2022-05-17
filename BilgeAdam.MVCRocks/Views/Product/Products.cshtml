@@ -6,6 +6,7 @@
         @await Component.InvokeAsync("Categories")
     </div>
     <div class="col-9">
+        <a class="btn btn-primary" asp-action="New" asp-controller="Product">Yeni Ürün</a>
         @if (Model.IsEmpty)
         {
             <div class="alert alert-warning" role="alert">Bu görünümde bir ürün bulunamadı</div>

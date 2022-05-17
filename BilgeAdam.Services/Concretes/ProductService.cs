@@ -1,4 +1,5 @@
 ﻿using BilgeAdam.Data.Context;
+using BilgeAdam.Data.Entities;
 using BilgeAdam.Services.Abstractions;
 using BilgeAdam.Services.Contracts;
 
@@ -28,6 +29,20 @@ namespace BilgeAdam.Services.Concretes
                             Stock = s.UnitsInStock
                         })
                         .ToList();
+        }
+
+        public void Save(NewProductDTO data)
+        {
+            var entity = new Product
+            { 
+                ProductName = data.Name,
+                UnitPrice = data.Price,
+                UnitsInStock = data.Stock,
+                CategoryID = data.CategoryID,
+                SupplierID = data.SupplierID
+            };
+            context.Products.Add(entity);
+            context.SaveChanges();
         }
     }
 }
