@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BilgeAdam.MVCRocks.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
 </head>
 <body>
     <header>
@@ -27,6 +29,9 @@
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Ürünler", "Products", "Product", null, new { @class = "nav-link text-dark" })
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductsWithAjax">Ürünler (AJAX)</a>
                         </li>
                     </ul>
                 </div>

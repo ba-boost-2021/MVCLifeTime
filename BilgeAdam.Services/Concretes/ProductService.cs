@@ -2,6 +2,7 @@
 using BilgeAdam.Data.Entities;
 using BilgeAdam.Services.Abstractions;
 using BilgeAdam.Services.Contracts;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BilgeAdam.Services.Concretes
 {
@@ -13,6 +14,23 @@ namespace BilgeAdam.Services.Concretes
         {
             this.context = context;
         }
+
+        public List<ProductListDTO> GetPagedProducts(int count, int page)
+        {
+            return context.Products
+                .Skip((page - 1) * count)
+                .Take(count)
+                .Select(s => new ProductListDTO
+                {
+                    Id = s.ProductID,
+                    Name = s.ProductName,
+                    Category = s.Category != null ? s.Category.CategoryName : null,
+                    Price = s.UnitPrice,
+                    Stock = s.UnitsInStock
+                })
+                .ToList();
+        }
+
         public List<ProductListDTO> GetProducts(int? categoryId)
         {
             var query = context.Products.AsQueryable();

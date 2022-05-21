@@ -6,5 +6,6 @@ namespace BilgeAdam.Services.Abstractions
     {
         List<ProductListDTO> GetProducts(int? categoryId);
         void Save(NewProductDTO data);
+        List<ProductListDTO> GetPagedProducts(int count, int page);
     }
 }

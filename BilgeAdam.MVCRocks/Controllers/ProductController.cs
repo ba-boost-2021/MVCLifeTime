@@ -24,6 +24,11 @@ namespace BilgeAdam.MVCRocks.Controllers
             return View(vm);
         }
 
+        public IActionResult ProductsWithAjax()
+        {
+            return View("AjaxPage");
+        }
+
         [HttpGet]
         public IActionResult New()
         {
@@ -40,6 +45,12 @@ namespace BilgeAdam.MVCRocks.Controllers
             var dto = model.ToDTO();
             productService.Save(dto);
             return RedirectToAction("Products", "Product");
+        }
+
+        public IActionResult PagedProducts(int count, int page)
+        {
+            var products = productService.GetPagedProducts(count, page);
+            return Json(products);
         }
     }
 }
