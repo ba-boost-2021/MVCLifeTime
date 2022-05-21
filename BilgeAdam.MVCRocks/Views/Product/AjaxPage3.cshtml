@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Axios AJAX";
+}
+<h3>Ürünler</h3>
+<div class="row" id="app">
+    <div class="col-3">
+        <i class="fa-solid fa-spinner fa-spin" v-if="showCategoryLoader"></i>
+        <ul class="list-unstyled">
+            <li v-for="c in categories">
+                <a href="/product/products?categoryId={{c.value}}">{{c.text}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <button class="btn btn-primary" @@click="previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="btn btn-primary" @@click="next"><i class="fa-solid fa-chevron-right"></i></button>
+        <i class="fa-solid fa-spinner fa-spin" v-if="showProductLoader"></i>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Ürün Adı</th>
+                    <th>Türü</th>
+                    <th>Fiyat</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="p in products">
+                    <td>{{p.name}}</td>
+                    <td>{{p.category}}</td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.stock}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section HeadScripts
+{
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3"></script>
+}
+
+@section Scripts
+{
+<script>
+      const { createApp } = Vue;
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      const ajax = axios.create({
+          baseUrl: "https://localhost:9000",
+          timeout: 5000
+      });
+
+
+      createApp({
+          data() {
+            return {
+              categories: [],
+              products: [],
+              showCategoryLoader: true,
+              showProductLoader: true,
+              count: 15,
+              page: 1
+            }
+          },
+          mounted(){
+            setTimeout(() => {
+               this.loadCategories();
+               this.loadProducts();
+            }, 3000);
+          },
+          methods: {
+            loadCategories() {
+                this.showCategoryLoader = true;
+                ajax.get("/category/options").then(data => {
+                    this.categories = data.data;
+                    this.showCategoryLoader = false;
+                });
+            },
+            loadProducts() {
+                this.showProductLoader = true;
+                ajax.get(`/product/pagedproducts?count=${this.count}&page=${this.page}`).then(data => {
+                    this.products = data.data;
+                    this.showProductLoader = false;
+                });
+            },
+            next() {
+                this.page++;
+                this.loadProducts();
+            },
+            previous() {
+                this.page--;
+                this.loadProducts();
+            }
+          }
+    }).mount("#app")
+</script>
+}

@@ -8,6 +8,7 @@ namespace BilgeAdam.MVCRocks.Controllers
     {
         public HomeController()
         {
+            
         }
 
         public IActionResult Index()

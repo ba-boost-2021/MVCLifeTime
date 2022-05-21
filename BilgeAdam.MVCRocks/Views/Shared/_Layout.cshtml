@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/BilgeAdam.MVCRocks.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
+    @await RenderSectionAsync("HeadScripts", required: false)
 </head>
 <body>
     <header>
@@ -31,7 +32,13 @@
                             @Html.ActionLink("Ürünler", "Products", "Product", null, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductsWithAjax">Ürünler (AJAX)</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductsWithAjax">Ürünler (Fetch)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductsWithJQAjax">Ürünler (jQuery)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductsWithAxios">Ürünler (axios)</a>
                         </li>
                     </ul>
                 </div>

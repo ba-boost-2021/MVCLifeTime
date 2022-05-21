@@ -1,4 +1,7 @@
-﻿<h3>Ürünler</h3>
+﻿@{
+    ViewData["Title"] = "Fetch API";
+}
+<h3>Ürünler</h3>
 <div class="row">
     <div class="col-3">
         <i id="categoryLoader" class="fa-solid fa-spinner fa-spin"></i>
@@ -45,7 +48,7 @@
                     let item = data[i];
 
                     let a = document.createElement("a");
-                    a.setAttribute("href", "/products/product?categoryid=" + item.value);
+                    a.setAttribute("href", "/product/products?categoryid=" + item.value);
                     a.innerText = item.text;
 
                     let li = document.createElement("li");

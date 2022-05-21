@@ -29,6 +29,16 @@ namespace BilgeAdam.MVCRocks.Controllers
             return View("AjaxPage");
         }
 
+        public IActionResult ProductsWithJQAjax()
+        {
+            return View("AjaxPage2");
+        }
+
+        public IActionResult ProductsWithAxios()
+        {
+            return View("AjaxPage3");
+        }
+
         [HttpGet]
         public IActionResult New()
         {
