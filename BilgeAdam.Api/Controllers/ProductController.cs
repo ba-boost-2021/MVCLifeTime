@@ -42,5 +42,33 @@ namespace BilgeAdam.Api.Controllers
             var result = productService.GetProducts();
             return Ok(result);
         }
+
+        [HttpGet("filter-by-category/{categoryId}")]
+        public IActionResult FilterByCategory([FromRoute]int categoryId)
+        {
+            var result = productService.Filter(new FilterProductDTO {  CategoryId = categoryId });
+            return Ok(result);
+        }
+
+        [HttpPost("filter")]
+        public IActionResult FilterProducts([FromBody] FilterProductDTO data)
+        {
+            var result = productService.Filter(data);
+            return Ok(result);
+        }
+
+        [HttpGet("filter2")]
+        public IActionResult FilterProducts2([FromQuery] FilterProductDTO data)
+        {
+            var result = productService.Filter(data);
+            return Ok(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Create([FromBody] NewProductDTO data)
+        {
+            var saved = productService.Save(data);
+            return saved ? Ok() : BadRequest();
+        }
     }
 }

@@ -15,6 +15,31 @@ namespace BilgeAdam.Services.Concretes
             this.context = context;
         }
 
+        public List<ProductListDTO> Filter(FilterProductDTO data)
+        {
+            var query = context.Products.AsQueryable();
+            if (data.CategoryId.HasValue)
+            {
+                query = query.Where(f => f.CategoryID == data.CategoryId.Value);
+            }
+            if (data.SupplierId.HasValue)
+            {
+                query = query.Where(f => f.SupplierID == data.SupplierId.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(data.Name))
+            {
+                query = query.Where(f => f.ProductName.StartsWith(data.Name.Trim()));
+            }
+            return query.Select(s => new ProductListDTO
+            {
+                Id = s.ProductID,
+                Name = s.ProductName,
+                Category = s.Category != null ? s.Category.CategoryName : null,
+                Price = s.UnitPrice,
+                Stock = s.UnitsInStock
+            }).ToList();
+        }
+
         public List<ProductListDTO> GetPagedProducts(int count, int page)
         {
             return context.Products
@@ -49,8 +74,13 @@ namespace BilgeAdam.Services.Concretes
                         .ToList();
         }
 
-        public void Save(NewProductDTO data)
+        public bool Save(NewProductDTO data)
         {
+            var categoryExist = context.Categories.Any(f => f.CategoryID == data.CategoryID);
+            if (!categoryExist)
+            {
+                return false;
+            }
             var entity = new Product
             { 
                 ProductName = data.Name,
@@ -60,7 +90,8 @@ namespace BilgeAdam.Services.Concretes
                 SupplierID = data.SupplierID
             };
             context.Products.Add(entity);
-            context.SaveChanges();
+            var result = context.SaveChanges();
+            return result > 0;
         }
     }
 }
