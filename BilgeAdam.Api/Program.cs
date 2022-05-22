@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var settingSection = builder.Configuration.GetSection("Settings");
 var settings = settingSection.Get<Settings>();
+builder.Services.Configure<Settings>(settingSection);
 // Add services to the container.
 
 builder.Services.AddControllers();

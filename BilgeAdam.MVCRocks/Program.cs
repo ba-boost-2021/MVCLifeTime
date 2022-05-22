@@ -1,19 +1,19 @@
-using BilgeAdam.Common.Configuration;
+ï»¿using BilgeAdam.Common.Configuration;
 using BilgeAdam.Data.Context;
 using BilgeAdam.Services;
 using Microsoft.EntityFrameworkCore;
 
 //Environment : Development 
 // (ENV) = "Development" => ASPNETCORE_ENVIRONMENT
-//launchSettings.json içerisindeki "ASPNETCORE_ENVIRONMENT" deðeri þu an çalýþtýðýnýz ortamý belirler
+//launchSettings.json iÃ§erisindeki "ASPNETCORE_ENVIRONMENT" deÃ°eri Ã¾u an Ã§alÃ½Ã¾tÃ½Ã°Ã½nÃ½z ortamÄ± belirler
 
 
 var builder = WebApplication.CreateBuilder(args);
-//Öncelikle appSettings.json ve appSettings.{ENV}.json'a git
+//Ã–ncelikle appSettings.json ve appSettings.{ENV}.json'a git
 var settingSection = builder.Configuration.GetSection("Settings");
 var settings = settingSection.Get<Settings>();
 
-builder.Services.Configure<Settings>(settingSection); // DI üzerinden Setting'e eriþebilmek için yazýldý
+builder.Services.Configure<Settings>(settingSection); // DI Ã¼zerinden Setting'e eriÅŸebilmek iÃ§in yazÄ±ldÄ±
 
 
 // Add services to the container. (DI Container) -> Dependency Injection Container

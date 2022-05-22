@@ -144,6 +144,99 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Open Weather App",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?lat=39.9720861&lon=32.8024613&appid=a4c60b1fb79dd6e940a7ac59b8cb30b2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "39.9720861"
+						},
+						{
+							"key": "lon",
+							"value": "32.8024613"
+						},
+						{
+							"key": "appid",
+							"value": "a4c60b1fb79dd6e940a7ac59b8cb30b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weath Api Yobaz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.weatherapi.com/v1/current.json?key=7c62cbf86deb4f3eb1684711222205&q=Istanbul&aqi=no",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weatherapi",
+						"com"
+					],
+					"path": [
+						"v1",
+						"current.json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "7c62cbf86deb4f3eb1684711222205"
+						},
+						{
+							"key": "q",
+							"value": "Istanbul"
+						},
+						{
+							"key": "aqi",
+							"value": "no"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weather Api Proxy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7000/api/weather/city/D309A3EB-1597-451F-B51F-959FF902BD30",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"weather",
+						"city",
+						"D309A3EB-1597-451F-B51F-959FF902BD30"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
