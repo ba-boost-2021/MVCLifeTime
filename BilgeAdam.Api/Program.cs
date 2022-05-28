@@ -19,6 +19,14 @@ builder.Services.AddDbContext<NorthwindContext>(builder =>
 {
     builder.UseSqlServer(settings.Database.ConnectionString);
 });
+builder.Services.AddCors(b =>
+{
+    b.AddPolicy("Development", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,5 +37,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(builder.Environment.EnvironmentName);
 app.MapControllers();
 app.Run();

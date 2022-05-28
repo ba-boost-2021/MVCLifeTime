@@ -40,6 +40,21 @@ namespace BilgeAdam.Services.Concretes
             }).ToList();
         }
 
+        public BasicProductInfo GetInformation(int id)
+        {
+            var product = context.Products.FirstOrDefault(f => f.ProductID == id);
+            if (product == null)
+            {
+                return null;
+            }
+
+            return new BasicProductInfo
+            {
+                Price = product.UnitPrice,
+                Stock = product.UnitsInStock
+            };
+        }
+
         public List<ProductListDTO> GetPagedProducts(int count, int page)
         {
             return context.Products

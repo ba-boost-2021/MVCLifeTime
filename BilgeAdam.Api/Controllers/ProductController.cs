@@ -10,11 +10,13 @@ namespace BilgeAdam.Api.Controllers
     {
         private ILogger<ProductController> logger;
         private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
 
-        public ProductController(ILogger<ProductController> logger, IProductService productService)
+        public ProductController(ILogger<ProductController> logger, IProductService productService, ICategoryService categoryService)
         {
             this.logger = logger;
             this.productService = productService;
+            this.categoryService = categoryService;
         }
         [HttpGet]
         public IActionResult Get([FromQuery]int id)
@@ -33,6 +35,13 @@ namespace BilgeAdam.Api.Controllers
             result.Id = id;
             result.Name = "Can Perk";
             logger.LogInformation("Ürün bilgisi cevabı verildi");
+            return Ok(result);
+        }
+
+        [HttpGet("categories")]
+        public IActionResult GetCategories()
+        {
+            var result = categoryService.GetCategories();
             return Ok(result);
         }
 
@@ -61,6 +70,17 @@ namespace BilgeAdam.Api.Controllers
         public IActionResult FilterProducts2([FromQuery] FilterProductDTO data)
         {
             var result = productService.Filter(data);
+            return Ok(result);
+        }
+
+        [HttpGet("info/{id}")]
+        public IActionResult GetProductBasicInfo([FromRoute]int id)
+        {
+            var result = productService.GetInformation(id);
+            if (result == null)
+            {
+                return BadRequest();
+            }
             return Ok(result);
         }
 

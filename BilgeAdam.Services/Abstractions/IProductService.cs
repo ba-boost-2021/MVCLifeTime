@@ -8,5 +8,6 @@ namespace BilgeAdam.Services.Abstractions
         bool Save(NewProductDTO data);
         List<ProductListDTO> GetPagedProducts(int count, int page);
         List<ProductListDTO> Filter(FilterProductDTO data);
+        BasicProductInfo GetInformation(int id);
     }
 }
