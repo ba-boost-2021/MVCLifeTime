@@ -1,7 +1,7 @@
 <template>
-  <div>Sayfanın Mevcut Değeri <span>{{ number }}</span></div>
-  <button class="btn btn-primary me-2 pink" @click="increase">Artır</button>
-  <button class="btn btn-primary" @click="decrease" v-if="canDecrease">Azalt</button>
+  <div> {{ $t("numbers.text", { n: number}) }}</div>
+  <button class="btn btn-primary me-2 pink" @click="increase">{{ $t("numbers.increase")}}</button>
+  <button class="btn btn-primary" @click="decrease" v-if="canDecrease">{{ $t("numbers.decrease") }}</button>
 </template>
 
 <script>

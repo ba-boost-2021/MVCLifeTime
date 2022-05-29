@@ -25,16 +25,15 @@
         <input type="text" class="form-control" v-model="phone" maxlength="16" />
       </div>
       <button type="button" class="btn btn-primary me-2" @click="save">
-        <span class="fa-solid fa-save"></span> Kaydet
+        <span class="fa-solid fa-save"></span> {{ $t("common.save")}}
       </button>
       <button type="button" class="btn btn-danger" @click="clear">
-        <span class="fa-solid fa-trash"></span> Temizle
+        <span class="fa-solid fa-trash"></span> {{ $t("common.clear")}}
       </button>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "New",
   emits: ["saved"],
@@ -63,7 +62,7 @@ export default {
               city: this.city,
               phone: this.phone
           }
-          axios.post("https://localhost:7000/api/employee/create", employee)
+          this.$ajax.post("api/employee/create", employee)
                .then(d => {
                    if(d.data) {
                        //CHILD COMPONENT'tan PARENT COMPONENT'a veri göndermenin tek yolu "emit"

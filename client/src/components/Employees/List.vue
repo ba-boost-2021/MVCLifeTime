@@ -1,6 +1,6 @@
 <template>
   <button class="btn btn-primary mb-2" @click="load" :disabled="!canRefresh">
-    <span class="fa-solid fa-refresh"></span> Yenile
+    <span class="fa-solid fa-refresh"></span> {{ $t("common.refresh")}}
   </button>
   <table class="table table-striped table-bordered">
     <thead>
@@ -22,7 +22,6 @@
   </table>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "List",
   data() {
@@ -36,7 +35,7 @@ export default {
   },
   methods: {
     load() {
-      axios.get("https://localhost:7000/api/employee/list").then((d) => {
+      this.$ajax.get("api/employee/list").then((d) => {
         this.employees = d.data;
         this.canRefresh = false;
         setTimeout(() => {

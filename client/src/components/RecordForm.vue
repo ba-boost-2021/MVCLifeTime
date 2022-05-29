@@ -19,10 +19,10 @@
             </select>
           </div>
           <button type="button" class="btn btn-primary me-2" @click="save">
-            <span class="fa-solid fa-save"></span> Kaydet
+            <span class="fa-solid fa-save"></span> {{ $t("common.save")}}
           </button>
           <button type="button" class="btn btn-danger" @click="clear">
-            <span class="fa-solid fa-trash"></span> Temizle
+            <span class="fa-solid fa-trash"></span> {{ $t("common.clear")}}
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
-﻿using BilgeAdam.Services.Abstractions;
+﻿using BilgeAdam.Api.Contracts;
+using BilgeAdam.Services.Abstractions;
 using BilgeAdam.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,13 @@ namespace BilgeAdam.Api.Controllers
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
 
-        public ProductController(ILogger<ProductController> logger, IProductService productService, ICategoryService categoryService)
+        public ProductController(ILogger<ProductController> logger, IProductService productService, 
+                                 ICategoryService categoryService, RequestIdentity requestIdentity)
         {
             this.logger = logger;
             this.productService = productService;
             this.categoryService = categoryService;
+            logger.LogInformation($"[{requestIdentity.TimeStamp}] zamanlı isteğin kimliği : {requestIdentity.Id}");
         }
         [HttpGet]
         public IActionResult Get([FromQuery]int id)

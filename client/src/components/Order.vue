@@ -29,18 +29,23 @@
         />
         <em v-if="productId !== null">Stok Miktarı : {{ stock }}</em>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Fiyat</label>
-        <input type="number" class="form-control" v-model="price" />
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          v-model="useRequestFilter"
+          id="requestFilter"
+          @change="fetchCategories"
+        />
+        <label class="form-check-label" for="requestFilter"> Ürün Türünü Kısıtla</label>
       </div>
       <button type="button" class="btn btn-primary me-2" @click="save">
-        <span class="fa-solid fa-save"></span> Kaydet
+        <span class="fa-solid fa-save"></span> {{ $t("common.save")}}
       </button>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "Order",
   data() {
@@ -53,12 +58,11 @@ export default {
       amount: null,
       stock: null,
       invalidStock: false,
+      useRequestFilter: false,
     };
   },
   mounted() {
-    axios.get("https://localhost:7000/api/product/categories").then((response) => {
-      this.categories = response.data;
-    });
+    this.fetchCategories();
   },
   methods: {
     save() {
@@ -68,13 +72,26 @@ export default {
         return;
       }
     },
+    fetchCategories() {
+      let config = {};
+      if (this.useRequestFilter) {
+        config.headers = {
+          region: "tr-TR" //Bakınız RegionalSeparationMiddleware.cs:15
+        };
+      }
+      this.$ajax
+        .get("api/product/categories", config)
+        .then((response) => {
+          this.categories = response.data;
+        });
+    },
     categoryChanged() {
       this.price = null;
       this.amount = null;
       this.stock = null;
       this.products = [];
-      axios
-        .get(`https://localhost:7000/api/product/filter2?categoryId=${this.categoryId}`)
+      this.$ajax
+        .get(`api/product/filter2?categoryId=${this.categoryId}`)
         .then((response) => {
           this.products = response.data;
         });
@@ -83,8 +100,8 @@ export default {
       this.price = null;
       this.amount = null;
       this.stock = null;
-      axios
-        .get(`https://localhost:7000/api/product/info/${this.productId}`)
+      this.$ajax
+        .get(`api/product/info/${this.productId}`)
         .then((response) => {
           this.stock = response.data.stock;
           this.price = response.data.price;

@@ -1,4 +1,28 @@
 <template>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hakkımızda</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <select class="form-control" v-model="$i18n.locale">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  </nav>
   <div>
     <ul class="nav nav-pills mb-3 mt-5" role="tablist">
       <li class="nav-item" role="presentation">
@@ -10,7 +34,7 @@
           type="button"
           role="tab"
         >
-          Sayılar
+          {{ $t("titles.numbers") }}
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -22,7 +46,7 @@
           type="button"
           role="tab"
         >
-          Kayıt Formu
+          {{ $t("titles.register") }}
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -34,7 +58,7 @@
           type="button"
           role="tab"
         >
-          Çalışanlar
+          {{ $t("titles.employees") }}
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -46,7 +70,7 @@
           type="button"
           role="tab"
         >
-          Sipariş
+          {{ $t("titles.order") }}
         </button>
       </li>
     </ul>

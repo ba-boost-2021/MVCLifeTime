@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BilgeAdam.Common\BilgeAdam.Common.csproj" />
     <ProjectReference Include="..\BilgeAdam.Data\BilgeAdam.Data.csproj" />
   </ItemGroup>
 
