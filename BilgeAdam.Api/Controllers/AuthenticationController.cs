@@ -1,5 +1,7 @@
-﻿using BilgeAdam.Services.Contracts;
+﻿using BilgeAdam.Common.Configuration;
+using BilgeAdam.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -10,6 +12,11 @@ namespace BilgeAdam.Api.Controllers
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
+        private readonly JwtSettings jwtSettings;
+        public AuthenticationController(IOptions<Settings> options)
+        {
+            jwtSettings = options.Value.Jwt;
+        }
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginDTO data)
         {
@@ -22,8 +29,8 @@ namespace BilgeAdam.Api.Controllers
             claims.Add("Culture", "tr-TR");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.Now.AddMinutes(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("var bir gariplik diyorsun koyamadın adını :)")),
+                Expires = DateTime.Now.AddMinutes(jwtSettings.Expires),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
                                                             SecurityAlgorithms.HmacSha256Signature),
                 Claims = claims,
                 IssuedAt = DateTime.Now,
