@@ -14,6 +14,7 @@ const i18n = createI18n({
         employees: "Çalışanlar",
         register: "Kayıt Formu",
         order: "Sipariş",
+        login: "Giriş Yap"
       },
       numbers: {
         increase: "Artır",
@@ -32,6 +33,7 @@ const i18n = createI18n({
         employees: "Employees",
         register: "Register Form",
         order: "Order",
+        login: "Login"
       },
       numbers: {
         increase: "Increase",

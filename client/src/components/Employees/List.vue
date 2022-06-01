@@ -1,8 +1,11 @@
 <template>
   <button class="btn btn-primary mb-2" @click="load" :disabled="!canRefresh">
-    <span class="fa-solid fa-refresh"></span> {{ $t("common.refresh")}}
+    <span class="fa-solid fa-refresh"></span> {{ $t("common.refresh") }}
   </button>
-  <table class="table table-striped table-bordered">
+  <div class="alert alert-warning" role="alert" v-if="unauthorized">
+    Verileri görebilmeniz için giriş yapınız!
+  </div>
+  <table class="table table-striped table-bordered" v-else>
     <thead>
       <tr>
         <th>Adı Soyadı</th>
@@ -28,6 +31,7 @@ export default {
     return {
       employees: [],
       canRefresh: true,
+      unauthorized: false,
     };
   },
   mounted() {
@@ -35,13 +39,20 @@ export default {
   },
   methods: {
     load() {
-      this.$ajax.get("api/employee/list").then((d) => {
-        this.employees = d.data;
-        this.canRefresh = false;
-        setTimeout(() => {
-          this.canRefresh = true;
-        }, 3000);
-      });
+      this.unauthorized = false;
+      this.employees = [];
+      this.$ajax
+        .get("api/employee/list")
+        .then((d) => {
+          this.employees = d.data;
+          this.canRefresh = false;
+          setTimeout(() => {
+            this.canRefresh = true;
+          }, 3000);
+        })
+        .catch(() => {
+          this.unauthorized = true;
+        });
     },
   },
 };

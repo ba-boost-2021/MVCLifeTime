@@ -1,33 +1,53 @@
 <template>
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Hakkımızda</a>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <select class="form-control" v-model="$i18n.locale">
-          <option value="tr">Türkçe</option>
-          <option value="en">English</option>
-        </select>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hakkımızda</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <select class="form-control" v-model="$i18n.locale">
+            <option value="tr">Türkçe</option>
+            <option value="en">English</option>
+          </select>
+        </div>
       </div>
     </div>
-  </div>
   </nav>
   <div>
     <ul class="nav nav-pills mb-3 mt-5" role="tablist">
       <li class="nav-item" role="presentation">
         <button
           class="nav-link active"
+          id="pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#login"
+          type="button"
+          role="tab"
+        >
+          {{ $t("titles.login") }}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
           id="pills-home-tab"
           data-bs-toggle="pill"
           data-bs-target="#numbers"
@@ -75,7 +95,10 @@
       </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="numbers" role="tabpanel">
+      <div class="tab-pane fade show active" id="login" role="tabpanel">
+        <Authentication />
+      </div>
+      <div class="tab-pane fade show" id="numbers" role="tabpanel">
         <Number :value="8" />
         <hr />
         <Number />
@@ -97,13 +120,15 @@ import Number from "./components/Number.vue";
 import RecordForm from "./components/RecordForm.vue";
 import Employees from "./components/Employees.vue";
 import Order from "./components/Order.vue";
+import Authentication from "./components/Authentication.vue";
 
 export default {
   components: {
     Number,
     RecordForm,
     Employees,
-    Order
+    Order,
+    Authentication
   },
 };
 </script>

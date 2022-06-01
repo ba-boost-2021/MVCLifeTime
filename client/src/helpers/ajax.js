@@ -5,7 +5,26 @@ export default {
       baseURL: "https://localhost:7000",
       timeout: 5000,
     });
-    //HTTP HEADER buradan yönetilebilir
-    app.config.globalProperties.$ajax = instance;
+
+    function setUpHeaders() {
+      let config = {
+        headers: {},
+      };
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+      }
+      return config;
+    }
+
+    let customAjax = {
+      get: function (url) {
+        return instance.get(url, setUpHeaders());
+      },
+      post: function (url, data) {
+        return instance.post(url, data, setUpHeaders());
+      },
+    };
+    app.config.globalProperties.$ajax = customAjax;
   },
 };
