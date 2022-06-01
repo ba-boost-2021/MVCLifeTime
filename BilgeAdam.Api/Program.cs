@@ -4,7 +4,10 @@ using BilgeAdam.Common.Configuration;
 using BilgeAdam.Common.Contracts;
 using BilgeAdam.Data.Context;
 using BilgeAdam.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,21 @@ builder.Services.Configure<Settings>(settingSection);
 
 builder.Services.AddRequestIdentity();
 builder.Services.AddControllers();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("var bir gariplik diyorsun koyamadın adını :)")),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+builder.Services.AddAuthorization();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -49,6 +67,7 @@ app.UseMiddleware<RegionalSeparationMiddleware>();
 app.UseCustomException();
 app.UseHttpsRedirection();
 app.UseCors(builder.Environment.EnvironmentName);
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
